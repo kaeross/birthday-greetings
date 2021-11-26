@@ -26,17 +26,24 @@ export class Friend {
 
   isBirthday(): Boolean {
     const parsedBirthday = moment(this.dOb, 'YYYY/MM/DD');
+
+    if (!parsedBirthday.isValid()) {
+      const errorMsg = `Invalid birthday ${this.dOb}`;
+      console.error(errorMsg);
+      throw new Error(errorMsg);
+    }
+
     const currentDate = moment();
 
     if (currentDate.dayOfYear() === parsedBirthday.dayOfYear()) {
       return true;
     }
 
-    const birthdayMonth = parsedBirthday.month();
+    const birthdayMonth = parsedBirthday.format('MM');
 
     // If the month is february and the birthday is on the 29th, greet on the 28th.
-    if (birthdayMonth === 2) {
-      return parsedBirthday.date() === 28;
+    if (birthdayMonth === '02' && parsedBirthday.date() === 29) {
+      return currentDate.date() === 28;
     }
 
     return false;
