@@ -6,6 +6,7 @@ export interface IDatabaseFriend {
   date_of_birth: string;
   email: string;
 }
+
 export class Friend {
   private constructor(
     readonly lastName: string,
@@ -27,13 +28,17 @@ export class Friend {
     const parsedBirthday = moment(this.dOb, 'YYYY/MM/DD');
     const currentDate = moment();
 
+    if (currentDate.dayOfYear() === parsedBirthday.dayOfYear()) {
+      return true;
+    }
+
     const birthdayMonth = parsedBirthday.month();
 
-    // If the month is february, greet on the 28th.
+    // If the month is february and the birthday is on the 29th, greet on the 28th.
     if (birthdayMonth === 2) {
       return parsedBirthday.date() === 28;
     }
 
-    return currentDate.dayOfYear() === parsedBirthday.dayOfYear();
+    return false;
   }
 }

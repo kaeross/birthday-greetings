@@ -1,7 +1,6 @@
-import {DatabaseClient} from './database/database_client';
 import {DatabaseService} from './database/database_service';
-import {AbstractGreeting} from './greetings/abstract_greeting';
-import {EmailGreeting} from './greetings/email_greeting';
+import {AbstractGreeter} from './greetings/abstract_greeter';
+import {EmailGreeter} from './greetings/email_greeter';
 import {Friend} from './friend';
 
 export class BirthdayGreeting {
@@ -16,12 +15,18 @@ export class BirthdayGreeting {
 
     for (const friend of friends) {
       if (friend.isBirthday()) {
-        this.greetFriendWith(friend, new EmailGreeting());
+        this.greetFriendWith(friend, new EmailGreeter());
       }
     }
   }
 
-  private greetFriendWith(friend: Friend, greeting: AbstractGreeting) {
+  /**
+   * Greets a friend using the specified greeter
+   *
+   * @param friend the friend to greet
+   * @param greeting the greeting
+   */
+  private greetFriendWith(friend: Friend, greeting: AbstractGreeter) {
     greeting.generate(friend);
     greeting.greet();
   }
