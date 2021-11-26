@@ -4,6 +4,10 @@ import {AbstractGreeter} from './abstract_greeter';
 export class EmailGreeter extends AbstractGreeter {
   greeting?: string;
 
+  /**
+   * Just a string but this could be formatted as an object to be passed to the mail client
+   * @param friend the friend to generate the message for
+   */
   generate(friend: Friend): void {
     this.greeting = `Subject: Happy birthday!\nHappy birthday, dear ${friend.firstName}!`;
   }

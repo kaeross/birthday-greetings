@@ -6,6 +6,9 @@ import {Friend} from './friend';
 export class BirthdayGreeting {
   constructor(private databaseService: DatabaseService) {}
 
+  /**
+   * Retrieves all friends from the database and sends a greeting to any which have a birthday today
+   */
   async sendGreeting() {
     const friends = await this.databaseService.getFriends();
 
