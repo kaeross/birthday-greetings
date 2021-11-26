@@ -23,5 +23,9 @@
         "jasmine-ts": "^0.4.0",
         "ts-node": "^10.4.0",
         "typescript": "^4.0.3"
+    },
+    "dependencies": {
+        "moment": "2.22.1",
+        "mongodb": "^4.2.0"
     }
 }
